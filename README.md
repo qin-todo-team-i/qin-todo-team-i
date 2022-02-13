@@ -1,19 +1,83 @@
 # Qin-Todo チーム I
 
+## 技術選定
+
+- React(Next.js)
+- JavaScript
+- TailwindCSS
+- ESLint
+- Prettier
+
 ## 環境構築手順
 
-### 1. 必要なモジュールのインストール
+### 1. リポジトリのクローンを作成
+
+```
+git clone https://github.com/qin-todo-team-i/qin-todo-team-i
+```
+
+### 2. 必要なモジュールのインストール
+
+```
+yarn
+```
+
+or
 
 ```
 npm install
 ```
 
-### 2. OpenAPI から型を生成する
+### 3. ローカル環境の立ち上げ
 
 ```
-npm run openapi-typescript
+yarn dev
 ```
 
-OpenAPI のドキュメントを編集した場合、再度生成が必要になる。
+or
 
-### 3. それぞれの README に進む
+```
+npm run dev
+```
+
+## 開発手順
+
+ブランチ名は feature/#[issue 番号]とする
+
+### 0. 現在のブランチの確認とローカル環境の更新
+
+```
+git branch
+```
+
+- 基本的にブランチを作成する前は dev に移動し dev を最新状態にする
+
+```
+git checkout dev
+```
+
+      ↓
+
+```
+git pull origin dev
+```
+
+### 1. 作業ブランチの作成
+
+- ブランチを作成する場合は必ず dev にいる状態から作成する(コンフリクトの原因になりやすいため)
+
+```
+git branch feature/ブランチ名(issue番号)
+```
+
+### 2. 作成した作業ブランチへ移動
+
+```
+git checkout feature/ブランチ名(issue番号)
+```
+
+### 3. 開発
+
+## その他
+
+- PR を出す時は dev に向ける(デフォルトで設定されている)
