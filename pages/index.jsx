@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "styles/Home.module.css";
+import React from "react";
 
 export default function Home() {
   return (
@@ -13,7 +14,6 @@ export default function Home() {
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
       <h1 className="text-left font-bold underline">hello tailwind css</h1>
       <h1>testtest</h1>
-      　console.log("test");
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
