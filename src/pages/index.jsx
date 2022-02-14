@@ -1,10 +1,12 @@
 import React from "react";
-import { Layout } from "src/layout/Layout";
+import { Layout } from "src/layouts/Layout";
 
 export default function Home() {
   return (
     <Layout>
-      <div></div>
+      <div>
+        <h1>練習用</h1>
+      </div>
     </Layout>
   );
 }
