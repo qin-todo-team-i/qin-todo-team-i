@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <Layout>
       <div>
-        <h1>練習用</h1>
+        <h1 className="text-primary">練習用</h1>
       </div>
     </Layout>
   );
