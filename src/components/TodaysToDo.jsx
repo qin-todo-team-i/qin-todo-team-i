@@ -23,7 +23,8 @@ const Button = ({ children, type, onClick, className }) => (
   </button>
 );
 
-export const TodaysToDo = () => {
+export const TodaysToDo = (props) => {
+  const { children, style } = props;
   // react-hook-formを使ったフォームバリデーション
   const { handleSubmit, register, reset } = useForm();
 
@@ -180,7 +181,7 @@ export const TodaysToDo = () => {
 
   return (
     <div className="max-w-md">
-      <h1 className="text-primary font-bold text-2xl">今日する</h1>
+      <h1 className="font-bold text-2xl">{children}</h1>
 
       {/* タスク編集 or タスク表示 */}
       <div className="mt-6 space-y-2">
