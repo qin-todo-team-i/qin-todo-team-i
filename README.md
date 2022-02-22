@@ -67,18 +67,19 @@ git pull origin dev
 - ブランチを作成する場合は必ず dev にいる状態から作成する(コンフリクトの原因になりやすいため)
 
 ```
-git branch feature/ブランチ名(issue番号)
+git branch feature/#[issue番号]
 ```
 
 ### 2. 作成した作業ブランチへ移動
 
 ```
-git checkout feature/ブランチ名(issue番号)
+git checkout feature/#[issue番号]
 ```
 
 ### 3. 開発
 
 通常通り開発をする
+その後コミット、プッシュしてプルリクエスト
 
 ## その他
 
