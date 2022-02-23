@@ -12,7 +12,7 @@ const Input = ({ name, register, onBlurFunc, defaultValue }) => (
     autoFocus
     defaultValue={defaultValue}
     onBlur={onBlurFunc}
-    className="caret-primary outline-primary p-2 rounded w-full"
+    className="caret-primary outline-primary rounded w-full"
   />
 );
 
@@ -190,9 +190,9 @@ export const TodaysToDo = () => {
             <form
               onSubmit={handleSubmit(handleEditTask)}
               key={task.id}
-              className="flex items-center"
+              className="flex items-center gap-x-2"
             >
-              <span className="mr-2 text-2xl text-gray-400">○</span>
+              <span className="text-2xl text-gray-400">○</span>
               <Input
                 name="editTask"
                 register={register}
