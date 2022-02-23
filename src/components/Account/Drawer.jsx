@@ -1,17 +1,28 @@
 import React from "react";
-import Link from "next/link";
 import DrawerItem from "./DrawerItem";
 
-const Drawer = () => {
+const Drawer = ({ menuContent }) => {
+	const menuItems = menuContent.menuItems;
+
 	return (
-		<>
-			<h2 className='text-gray-400 text-sm'>設定</h2>
+		<div className='mt-12'>
+			<h2 className='text-gray-400 text-sm'>{menuContent.headline}</h2>
 			<ul className='list-none relative font-bold'>
-				<DrawerItem item='プロフィール設定' path='/account/profilesettings' />
-				<DrawerItem item='アカウント設定' path='/account/accountsettings' />
-				<DrawerItem item='テーマ' path='/account/themesettings' />
+				{menuItems.map((menuItem) => {
+					return (
+						<>
+							<DrawerItem
+								item={menuItem.item}
+								path={menuItem.path}
+								selectedItem={
+									menuItem.selectedItem ? menuItem.selectedItem : null
+								}
+							/>
+						</>
+					);
+				})}
 			</ul>
-		</>
+		</div>
 	);
 };
 
