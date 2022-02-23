@@ -3,12 +3,11 @@ import { TodaysToDo } from "src/components/TodaysToDo";
 import { Layout } from "src/layouts/Layout";
 
 export default function Home() {
-  return (
-    <Layout>
-      <div>
-        <h1 className="text-primary">test</h1>
-        <TodaysToDo />
-      </div>
-    </Layout>
-  );
+	return (
+		<Layout>
+			<div>
+				<TodaysToDo />
+			</div>
+		</Layout>
+	);
 }
