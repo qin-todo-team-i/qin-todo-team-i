@@ -12,7 +12,7 @@ const Input = ({ name, register, onBlurFunc, defaultValue }) => (
     autoFocus
     defaultValue={defaultValue}
     onBlur={onBlurFunc}
-    className="caret-primary outline-primary rounded w-full"
+    className="caret-primary outline-none rounded w-full"
   />
 );
 
