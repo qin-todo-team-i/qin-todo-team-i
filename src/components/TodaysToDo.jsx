@@ -1,182 +1,131 @@
 import { DuplicateIcon, TrashIcon } from "@heroicons/react/outline";
 import { PlusCircleIcon } from "@heroicons/react/solid";
+import axios from "axios";
 import { format } from "date-fns";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 // inputコンポーネント
-const Input = ({ name, register, onBlurFunc, defaultValue }) => (
+const Input = ({ name, register, outOfFocus, defaultValue }) => (
   <input
     {...register(name, { required: true })}
     type="text"
     autoFocus
     defaultValue={defaultValue}
-    onBlur={onBlurFunc}
+    onBlur={outOfFocus}
     className="caret-primary outline-none rounded w-full"
   />
 );
 
 // buttonコンポーネント
-const Button = ({ children, type, onClick, className }) => (
-  <button type={type} onClick={onClick} className={`w-full ${className}`}>
+const Button = ({ children, type, disabled, onClick, className }) => (
+  <button
+    type={type}
+    disabled={disabled}
+    onClick={onClick}
+    className={`w-full ${className}`}
+  >
     {children}
   </button>
 );
 
+const today = format(new Date(), "yyyy-MM-dd");
+
 export const TodaysToDo = () => {
+  const [tasks, setTasks] = useState([]);
+  const [isOpenAdd, setIsOpenAdd] = useState(false);
+  const [isOpenEdit, setIsOpenEdit] = useState(undefined);
+
   // react-hook-formを使ったフォームバリデーション
   const { handleSubmit, register, reset } = useForm();
 
-  const [isOpenAdd, setIsOpenAdd] = useState(false);
-  const [isOpenEdit, setIsOpenEdit] = useState(undefined);
-  const [tasks, setTasks] = useState([]);
-  const [isCompletionWaiting, setIsCompletionWaiting] = useState(false);
-
-  // 今日以降のタスクのみをフィルタリング
-  const todaysTask = tasks.filter(
-    (task) => task.limit >= format(new Date(), "yyyy-MM-dd")
-  );
-
-  // ToDoを追加する関数
-  const handleAddTask = (addData) => {
-    setTasks([
-      ...tasks,
-      {
-        id: tasks.length === 0 ? 0 : tasks[tasks.length - 1].id + 1,
-        task: addData.addTask,
-        limit: format(new Date(), "yyyy-MM-dd"),
-        completed: false,
-      },
-    ]);
-    reset();
-  };
-
-  // 対象のToDoを編集する関数
-  const handleEditTask = (editData) => {
-    setTasks(
-      tasks.map((task, index) =>
-        index === isOpenEdit
-          ? {
-              id: task.id,
-              task: editData.editTask,
-              limit: task.limit,
-              completed: task.completed,
-            }
-          : task
+  // サーバーから ToDo リストを取得する処理
+  const getTasks = useCallback(async () => {
+    await axios
+      .get(
+        // 期限が今日以前かつ完了日時が今日以降（今日ではない：日付が変わったら取得しない）のタスク
+        `http://localhost:3001/tasks?limit_lte=${today}&completedAt_gte=${today}&_sort=sortId`
       )
-    );
+      .then((res) => setTasks(res.data));
+  }, [setTasks]);
+
+  useEffect(() => {
+    getTasks();
+  }, []);
+
+  // inputからフォーカスを外す処理
+  const outOfFocus = () => {
+    setIsOpenAdd(false);
     setIsOpenEdit(undefined);
     reset();
   };
 
-  // 対象のToDoを削除する関数
-  const handleRemoveTask = (index) => {
-    // 削除ボタンを押した対象以外で新しい配列を作成
-    const newTasks = tasks.filter((task, i) => i !== index);
-    // 新しい配列にidを振り直す
-    setTasks(
-      newTasks.map((task, i) =>
-        task.id !== index
-          ? {
-              id: i,
-              task: task.task,
-              limit: task.limit,
-              completed: task.completed,
-            }
-          : task
-      )
-    );
-  };
+  // ToDoを追加する処理
+  const handleAddTask = useCallback(
+    async (addData) => {
+      await axios.post("http://localhost:3001/tasks", {
+        sortId: tasks.length,
+        task: addData.addTask,
+        limit: today,
+        completed: false,
+        completedAt: format(new Date("9999-12-31"), "yyyy-MM-dd"),
+      });
+      getTasks();
+      reset();
+    },
+    [tasks]
+  );
 
-  // ToDoを複製後、配列をid順にソートするための関数
-  const handleSortId = (lists) =>
-    lists.sort((a, b) => {
-      if (a.id < b.id) {
-        return -1;
-      }
-      if (a.id > b.id) {
-        return 1;
-      }
-      return 0;
-    });
+  // 対象のToDoを編集する処理
+  const handleEditTask = useCallback(
+    async (editData) => {
+      await axios.patch(`http://localhost:3001/tasks/${isOpenEdit}`, {
+        task: editData.editTask,
+      });
+      getTasks();
+      reset();
+      outOfFocus();
+    },
+    [isOpenEdit]
+  );
 
-  // 対象のToDoを複製する関数
-  const handleDuplicateTask = (index) => {
-    // 選択したタスク以降のidに+1する
-    const organizeIdTasks = tasks.map((task) =>
-      task.id > index
-        ? {
-            id: task.id + 1,
-            task: task.task,
-            limit: task.limit,
-            completed: task.completed,
-          }
-        : task
-    );
-    // タスクを複製して元タスクのidに+1する
-    const newTasks = [
-      ...organizeIdTasks,
-      {
-        id: tasks[index].id + 1,
-        task: tasks[index].task,
-        limit: tasks[index].limit,
-        completed: tasks[index].completed,
-      },
-    ];
+  // 対象のToDoを削除する処理
+  const handleRemoveTask = useCallback(
+    async (index) => {
+      await axios.delete(`http://localhost:3001/tasks/${tasks[index]?.id}`);
+      getTasks();
+    },
+    [tasks]
+  );
 
-    setTasks(handleSortId(newTasks));
-  };
+  // 対象のToDoを複製する処理
+  const handleDuplicateTask = useCallback(
+    async (index) => {
+      await axios.post("http://localhost:3001/tasks", {
+        sortId: tasks[index]?.sortId,
+        task: tasks[index]?.task,
+        limit: today,
+        completed: false,
+        completedAt: format(new Date("9999-12-31"), "yyyy-MM-dd"),
+      });
+      getTasks();
+    },
+    [tasks]
+  );
 
-  // ToDoを完了にする関数
-  const handleCompletedTask = (index) => {
-    // 対象のタスクのcompletedのトグル操作
-    setIsCompletionWaiting(true);
-    setTasks(
-      tasks.map((task) =>
-        index === task.id
-          ? {
-              id: task.id,
-              task: task.task,
-              limit: task.limit,
-              completed: !task.completed,
-            }
-          : task
-      )
-    );
-  };
-
-  useEffect(() => {
-    // タスクの完了がクリックされた後に未完了のタスクのみで新しくフィルタリングする（2秒後に実行される）
-    if (isCompletionWaiting) {
-      const timer = setTimeout(() => {
-        const newTasks = tasks.filter((task) => task.completed === false);
-        // 新しい配列にidを振り直す
-        setTasks(
-          newTasks.map((task, index) =>
-            task.id !== index
-              ? {
-                  id: index,
-                  task: task.task,
-                  limit: task.limit,
-                  completed: task.completed,
-                }
-              : task
-          )
-        );
-        setIsCompletionWaiting(false);
-      }, 2000);
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [tasks]);
-
-  // inputからフォーカスが外れた時の関数
-  const onBlurFunc = () => {
-    setIsOpenAdd(false);
-    setIsOpenEdit(false);
-    reset();
-  };
+  // ToDoを完了にする処理
+  const handleCompletedTask = useCallback(
+    async (index) => {
+      await axios.patch(`http://localhost:3001/tasks/${tasks[index]?.id}`, {
+        completed: !tasks[index]?.completed,
+        completedAt: tasks[index]?.completed
+          ? format(new Date("9999-12-31"), "yyyy-MM-dd")
+          : today,
+      });
+      getTasks();
+    },
+    [tasks]
+  );
 
   return (
     <div className="max-w-md">
@@ -184,8 +133,8 @@ export const TodaysToDo = () => {
 
       {/* タスク編集 or タスク表示 */}
       <div className="mt-6 space-y-2">
-        {todaysTask.map((task, index) =>
-          isOpenEdit === index ? (
+        {tasks.map((task, index) =>
+          isOpenEdit === task.id ? (
             // タスク編集時
             <form
               onSubmit={handleSubmit(handleEditTask)}
@@ -197,7 +146,7 @@ export const TodaysToDo = () => {
                 name="editTask"
                 register={register}
                 defaultValue={task.task}
-                onBlurFunc={onBlurFunc}
+                outOfFocus={outOfFocus}
               />
             </form>
           ) : (
@@ -223,7 +172,8 @@ export const TodaysToDo = () => {
                 {/* タスク内容（クリックで編集状態に移行） */}
                 <Button
                   type="button"
-                  onClick={() => setIsOpenEdit(index)}
+                  disabled={task.completed}
+                  onClick={() => setIsOpenEdit(task.id)}
                   className={`text-left ${
                     task.completed ? "text-gray-400 line-through" : "text-black"
                   }`}
@@ -266,7 +216,7 @@ export const TodaysToDo = () => {
             className="flex items-center"
           >
             <p className="mr-2 text-2xl text-gray-400">○</p>
-            <Input name="addTask" register={register} onBlurFunc={onBlurFunc} />
+            <Input name="addTask" register={register} outOfFocus={outOfFocus} />
           </form>
         ) : (
           // タスク追加ボタン（クリックでタスク入力状態へ移行）
