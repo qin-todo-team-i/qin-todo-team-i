@@ -30,7 +30,7 @@ const Account = () => {
 
 	return (
 		<Layout>
-			<div className='px-8 relative'>
+			<div className='px-4 relative'>
 				<div className='py-4 max-w-2xl mx-auto'>
 					<div className='flex justify-between justify-items-center lg:hidden'>
 						<span className='flex flex-col justify-center'>
@@ -57,7 +57,7 @@ const Account = () => {
 					</ul>
 				</div>
 
-				<ul className='hidden lg:flex absolute top-0 right-0 w-48 py-1 flex-col border rounded-xl drop-shadow-sm'>
+				<ul className='hidden lg:flex absolute top-0 right-[max(calc((((100vw-1024px)/2)-calc(100vw/12))+18px),0px)] w-1/6 py-1 flex-col border rounded-xl drop-shadow-sm'>
 					<Link href='/'>
 						<li className='flex items-center gap-x-3 px-4 py-2 hover:bg-gray-100'>
 							<span>
