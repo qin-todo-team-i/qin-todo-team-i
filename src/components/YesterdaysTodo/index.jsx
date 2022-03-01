@@ -1,27 +1,8 @@
 import React, { useEffect, useState } from "react";
 import cc from "classcat";
-import { DuplicateIcon, TrashIcon } from "@heroicons/react/outline";
 
-export const YesterdaysTodo = () => {
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    setTasks([<Task key={1} />, <Task key={2} />, <Task key={3} />]);
-  }, []);
-
-  return (
-    <div className="p-5">
-      <div className="mb-4">
-        <h2 className="text-secondary text-1.5xl font-bold px-2">明日する</h2>
-      </div>
-      <div className="">
-        {/* <Task /> */}
-        {/* <Task /> */}
-        {tasks.map((task) => task)}
-      </div>
-    </div>
-  );
-};
+import { DuplicateButton } from "./Button/DuplicateButton";
+import { DeleteButton } from "./Button/DeleteButton";
 
 // memo
 // - 作成済み（確定済み）が否かのステータスを持つ : isXXX
@@ -30,7 +11,7 @@ export const YesterdaysTodo = () => {
 const Task = () => {
   const [text, setText] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-  const [isShown, setIsShown] = useState(false);
+  const [isMouseOver, setIsMouseOver] = useState(false);
 
   const handleClickButton = () => {
     setIsChecked(!isChecked);
@@ -48,8 +29,8 @@ const Task = () => {
   return (
     <div
       className="flex items-center gap-3 w-full p-2"
-      onMouseEnter={() => setIsShown(true)}
-      onMouseLeave={() => setIsShown(false)}
+      onMouseEnter={() => setIsMouseOver(true)}
+      onMouseLeave={() => setIsMouseOver(false)}
     >
       <button
         onClick={handleClickButton}
@@ -69,12 +50,33 @@ const Task = () => {
         onChange={handleChangeText}
         onKeyDown={handleKeyDown}
       />
-      {isShown && (
+      {isMouseOver && (
         <div className="inline-flex items-center gap-5">
-          <DuplicateIcon className="text-gray w-6 h-6 cursor-pointer" />
-          <TrashIcon className="text-gray w-6 h-6 cursor-pointer" />
+          <DuplicateButton />
+          <DeleteButton />
         </div>
       )}
+    </div>
+  );
+};
+
+export const YesterdaysTodo = () => {
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    setTasks([<Task key={1} />, <Task key={2} />, <Task key={3} />]);
+  }, []);
+
+  return (
+    <div className="p-5">
+      <div className="mb-4">
+        <h2 className="text-secondary text-1.5xl font-bold px-2">明日する</h2>
+      </div>
+      <div className="">
+        {/* <Task /> */}
+        {/* <Task /> */}
+        {tasks.map((task) => task)}
+      </div>
     </div>
   );
 };

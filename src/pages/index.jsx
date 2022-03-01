@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "src/layouts/Layout";
 import { TodaysToDo } from "src/components/TodaysToDo";
-import { YesterdaysTodo } from "src/components/YesterdaysTodo/YesterdaysTodo";
+import { YesterdaysTodo } from "src/components/YesterdaysTodo";
 
 const Home = () => {
   return (
