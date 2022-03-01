@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Layout } from "src/layouts/Layout";
+import { TodaysToDo } from "src/components/TodaysToDo";
 import { YesterdaysTodo } from "src/components/YesterdaysTodo/YesterdaysTodo";
 
-export default function Home() {
+const Home = () => {
   return (
     <Layout>
-      <YesterdaysTodo />
+      <div>
+        <TodaysToDo />
+        <YesterdaysTodo />
+      </div>
     </Layout>
   );
-}
+};
+
+export default Home;
