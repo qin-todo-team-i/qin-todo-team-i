@@ -1,16 +1,11 @@
 import React, { useState } from "react";
-import cc from "classcat";
 import UUID from "uuidjs";
 import { PlusCircleIcon } from "@heroicons/react/solid";
 
 export const AddTaskItem = (props) => {
   const { setTasks } = props;
   const [inputText, setInputText] = useState("");
-  const [isCompleted, setIsCompleted] = useState(false);
 
-  const handleClickButton = () => {
-    setIsCompleted(!isCompleted);
-  };
   const handleChangeInputText = (e) => {
     setInputText(e.target.value);
   };
@@ -41,10 +36,7 @@ export const AddTaskItem = (props) => {
       <input
         type="text"
         value={inputText}
-        className={cc({
-          "border-none focus:outline-none grow": true,
-          "text-gray line-through": isCompleted,
-        })}
+        className="border-none focus:outline-none grow"
         onChange={handleChangeInputText}
         onKeyDown={handleKeyDown}
       />
