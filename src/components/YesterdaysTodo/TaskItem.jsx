@@ -31,6 +31,7 @@ export const TaskItem = (props) => {
     }
   };
 
+  // タスクを更新し、空のタスクを作成
   const updateTaskAtIndex = () => {
     setTasks((_tasks) => {
       return [
@@ -49,6 +50,21 @@ export const TaskItem = (props) => {
       ];
     });
   };
+  // タスクを複製する
+  const duplicateTaskAtIndex = () => {
+    setTasks((_tasks) => {
+      return [
+        ..._tasks.slice(0, index + 1),
+        {
+          id: UUID.generate(),
+          text: inputText,
+          isCompleted: isCompleted,
+        },
+        ..._tasks.slice(index + 1),
+      ];
+    });
+  };
+  // タスクを削除する
   const deleteTaskAtIndex = () => {
     setTasks((_tasks) => {
       return [..._tasks.slice(0, index), ..._tasks.slice(index + 1)];
@@ -83,8 +99,8 @@ export const TaskItem = (props) => {
       />
       {isMouseOver && (
         <div className="inline-flex items-center gap-5">
-          <DuplicateButton />
-          <DeleteButton />
+          <DuplicateButton onClick={duplicateTaskAtIndex} />
+          <DeleteButton onClick={deleteTaskAtIndex} />
         </div>
       )}
     </div>
