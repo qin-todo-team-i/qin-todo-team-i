@@ -23,7 +23,11 @@ export const TaskItem = (props) => {
     if (e.keyCode === 13 && inputText) {
       // エンターキーが押された時の処理
       updateTaskAtIndex(); // タスクを更新し、次のタスクを作成
-      // 次のタスクをフォーカスする
+    }
+  };
+  const handleOnBlur = () => {
+    if (!inputText) {
+      deleteTaskAtIndex(); // タスクを削除
     }
   };
 
@@ -45,12 +49,18 @@ export const TaskItem = (props) => {
       ];
     });
   };
+  const deleteTaskAtIndex = () => {
+    setTasks((_tasks) => {
+      return [..._tasks.slice(0, index), ..._tasks.slice(index + 1)];
+    });
+  };
 
   return (
     <div
       className="flex items-center gap-3 w-full p-2"
       onMouseEnter={() => setIsMouseOver(true)}
       onMouseLeave={() => setIsMouseOver(false)}
+      onBlur={() => handleOnBlur()}
     >
       <button
         onClick={handleClickButton}
