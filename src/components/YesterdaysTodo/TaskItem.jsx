@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import cc from "classcat";
 import UUID from "uuidjs";
 
@@ -13,6 +13,10 @@ export const TaskItem = (props) => {
   const [isMouseOver, setIsMouseOver] = useState(false);
   const index = tasks.findIndex((_task) => _task === task);
 
+  useEffect(() => {
+    updateTaskAtIndex();
+  }, [isCompleted]);
+
   const handleClickButton = () => {
     setIsCompleted(!isCompleted);
   };
@@ -22,7 +26,8 @@ export const TaskItem = (props) => {
   const handleKeyDown = (e) => {
     if (e.keyCode === 13 && inputText) {
       // エンターキーが押された時の処理
-      updateTaskAtIndex(); // タスクを更新し、次のタスクを作成
+      updateTaskAtIndex(); // タスクを更新
+      createNewTaskAtNextIndex(); // 次のタスクを作成
     }
   };
   const handleOnBlur = () => {
@@ -41,6 +46,15 @@ export const TaskItem = (props) => {
           text: inputText,
           isCompleted: isCompleted,
         },
+        ..._tasks.slice(index + 1),
+      ];
+    });
+  };
+  // 次のインデックス位置に空のタスクを作成する
+  const createNewTaskAtNextIndex = () => {
+    setTasks((_tasks) => {
+      return [
+        ..._tasks.slice(0, index + 1),
         {
           id: UUID.generate(),
           text: "",
