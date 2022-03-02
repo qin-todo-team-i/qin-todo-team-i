@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import cc from "classcat";
 import UUID from "uuidjs";
+import { PlusCircleIcon } from "@heroicons/react/solid";
 
 export const AddTaskItem = (props) => {
   const { setTasks } = props;
@@ -36,14 +37,7 @@ export const AddTaskItem = (props) => {
 
   return (
     <div className="flex items-center gap-3 w-full p-2">
-      <button
-        onClick={handleClickButton}
-        className={cc({
-          "relative w-6 h-6 border-2 border-gray rounded-full": true,
-          "after:block after:w-4 after:h-4 after:bg-secondary after:absolute after:z-10 after:rounded-full after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2":
-            isCompleted,
-        })}
-      ></button>
+      <PlusCircleIcon className="text-gray w-6 h-6" />
       <input
         type="text"
         value={inputText}
