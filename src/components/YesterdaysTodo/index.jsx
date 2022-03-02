@@ -20,8 +20,8 @@ export const YesterdaysTodo = () => {
         <h2 className="text-secondary text-1.5xl font-bold px-2">明日する</h2>
       </div>
       <div className="">
-        {tasks.map((task, index) => {
-          return <TaskItem key={index} task={task} tasks={tasks} setTasks={setTasks} />;
+        {tasks.map((task) => {
+          return <TaskItem key={task.id} task={task} tasks={tasks} setTasks={setTasks} />;
         })}
         <AddTaskItem setTasks={setTasks} />
       </div>

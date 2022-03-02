@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import cc from "classcat";
+import UUID from "uuidjs";
 
 export const AddTaskItem = (props) => {
   const { setTasks } = props;
@@ -25,6 +26,7 @@ export const AddTaskItem = (props) => {
       return [
         ..._tasks,
         {
+          id: UUID.generate(),
           text: inputText,
           isCompleted: false,
         },

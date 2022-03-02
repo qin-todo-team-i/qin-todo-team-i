@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import cc from "classcat";
+import UUID from "uuidjs";
 
 import { DuplicateButton } from "./Button/DuplicateButton";
 import { DeleteButton } from "./Button/DeleteButton";
@@ -26,13 +27,11 @@ export const TaskItem = (props) => {
     console.log("handleChangeInputText");
   };
   const handleKeyDown = (e) => {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && inputText) {
       // エンターキーが押された時の処理
       console.log("enter");
-      updateTaskAtIndex(); // 自身をListに追加
-      // 次のindexに空タスクを作成
-      // addNewTaskAtNextIndex();
-      // 次のタスクをフォーカス
+      updateTaskAtIndex(); // タスクを更新し、次のタスクを作成
+      // 次のタスクをフォーカスする
     }
   };
 
@@ -41,10 +40,12 @@ export const TaskItem = (props) => {
       return [
         ..._tasks.slice(0, index),
         {
+          id: task.id,
           text: inputText,
           isCompleted: isCompleted,
         },
         {
+          id: UUID.generate(),
           text: "",
           isCompleted: false,
         },
@@ -53,18 +54,6 @@ export const TaskItem = (props) => {
     });
     console.log("updateTaskAtIndex");
   };
-  // const addNewTaskAtNextIndex = () => {
-  //   setTasks((_tasks) => {
-  //     return [
-  //       ..._tasks.slice(0, index + 1),
-  //       {
-  //         text: "",
-  //         isCompleted: false,
-  //       },
-  //       ..._tasks.slice(index + 1),
-  //     ];
-  //   });
-  // };
 
   return (
     <div
