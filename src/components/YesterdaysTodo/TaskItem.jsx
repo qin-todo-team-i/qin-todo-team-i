@@ -78,6 +78,7 @@ export const TaskItem = (props) => {
         })}
         onChange={handleChangeInputText}
         onKeyDown={handleKeyDown}
+        autoFocus
       />
       {isMouseOver && (
         <div className="inline-flex items-center gap-5">
