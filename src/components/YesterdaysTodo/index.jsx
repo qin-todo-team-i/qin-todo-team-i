@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { AddTaskItem } from "./Form/AddTaskItem";
 import { TaskItem } from "./TaskItem";
@@ -6,13 +6,6 @@ import { TaskItem } from "./TaskItem";
 export const YesterdaysTodo = () => {
   const [tasks, setTasks] = useState([]);
   console.log({ tasks });
-
-  // useEffect(() => {
-  //   setTasks([<Task key={1} />, <Task key={2} />, <Task key={3} />]);
-  // }, []);
-
-  //TODO:
-  // isEditing が true から false に変わったタイミングで値を更新する？
 
   return (
     <div className="p-5">

@@ -5,14 +5,8 @@ import UUID from "uuidjs";
 import { DuplicateButton } from "./Button/DuplicateButton";
 import { DeleteButton } from "./Button/DeleteButton";
 
-// memo
-// - 作成済み（確定済み）が否かのステータスを持つ : isXXX
-// - 作成前はプラスアイコン
-// - 作成後はチェックボックス風ボタン
 export const TaskItem = (props) => {
   const { task, tasks, setTasks } = props;
-  // console.log({ task });
-  // console.log({ tasks });
 
   const [inputText, setInputText] = useState(task.text);
   const [isCompleted, setIsCompleted] = useState(task.isCompleted);
@@ -24,12 +18,10 @@ export const TaskItem = (props) => {
   };
   const handleChangeInputText = (e) => {
     setInputText(e.target.value);
-    console.log("handleChangeInputText");
   };
   const handleKeyDown = (e) => {
     if (e.keyCode === 13 && inputText) {
       // エンターキーが押された時の処理
-      console.log("enter");
       updateTaskAtIndex(); // タスクを更新し、次のタスクを作成
       // 次のタスクをフォーカスする
     }
@@ -52,7 +44,6 @@ export const TaskItem = (props) => {
         ..._tasks.slice(index + 1),
       ];
     });
-    console.log("updateTaskAtIndex");
   };
 
   return (
