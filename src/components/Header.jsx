@@ -19,7 +19,7 @@ export const Header = () => {
         </Link>
       )}
 
-      <Link href="#">
+      <Link href="/account">
         <a>
           <Image src="/person.png" alt="logo" width={36} height={36} />
         </a>
