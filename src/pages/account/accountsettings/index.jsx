@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
 
 import { Layout } from "src/layouts/Layout";
+import ConfirmDialog from "src/components/Dialog/ConfirmDialog";
 
 const AccountSettings = () => {
+  const [isConfirmLogoutDialogOpen, setIsConfirmLogoutDialogOpen] = useState(false);
+  const [isConfirmDeleteAccountDialogOpen, setIsConfirmDeleteAccountDialogOpen] = useState(false);
+
+  const openConfirmLogoutDialog = () => {
+    setIsConfirmLogoutDialogOpen(true);
+  };
+  const closeConfirmLogoutDialog = () => {
+    setIsConfirmLogoutDialogOpen(false);
+  };
+  const openConfirmDeleteAccountDialog = () => {
+    setIsConfirmDeleteAccountDialogOpen(true);
+  };
+  const closeConfirmDeleteAccountDialog = () => {
+    setIsConfirmDeleteAccountDialogOpen(false);
+  };
+
   return (
     <Layout>
       <div className="max-w-2xl mx-auto px-6">
@@ -58,18 +75,38 @@ const AccountSettings = () => {
           <h2 className="text-slate-200 font-bold mb-5">アカウントの操作</h2>
           <ul>
             <li className="mb-5">
-              <span className="text-red-500 font-bold cursor-pointer">
+
+              <span className="text-red-500 font-bold cursor-pointer" onClick={openConfirmLogoutDialog}>
+
                 ログアウト
               </span>
             </li>
             <li className="">
-              <span className="text-red-500 font-bold cursor-pointer">
+
+              <span className="text-red-500 font-bold cursor-pointer" onClick={openConfirmDeleteAccountDialog}>
+
                 アカウントの削除
               </span>
             </li>
           </ul>
         </section>
       </div>
+      <ConfirmDialog
+        title="ログアウト"
+        message="ログアウトしてよろしいですか？"
+        isConfirmDialogOpen={isConfirmLogoutDialogOpen}
+        onClickSubmit={() => {}}
+        onClickCancel={closeConfirmLogoutDialog}
+        onClose={closeConfirmLogoutDialog}
+      />
+      <ConfirmDialog
+        title="アカウントの削除"
+        message="アカウントを完全に削除してよろしいですか？"
+        isConfirmDialogOpen={isConfirmDeleteAccountDialogOpen}
+        onClickSubmit={() => {}}
+        onClickCancel={closeConfirmDeleteAccountDialog}
+        onClose={closeConfirmDeleteAccountDialog}
+      />
     </Layout>
   );
 };
