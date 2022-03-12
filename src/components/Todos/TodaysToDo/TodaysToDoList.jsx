@@ -8,7 +8,7 @@ export const TodaysToDoList = ({ task, setIsOpenEdit }) => {
       disabled={task.completed}
       onClick={() => setIsOpenEdit(task.id)}
       className={`text-left ${
-        task.completed ? "text-gray-400 line-through" : "text-black"
+        task.completed ? "text-gray line-through" : "text-black"
       }`}
     >
       {task.task}

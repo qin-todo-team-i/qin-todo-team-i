@@ -17,7 +17,7 @@ export const DeleteTodaysToDo = ({ tasks, index, getTasks }) => {
     <Button
       type="button"
       onClick={() => handleRemoveTask(index)}
-      className="text-transparent w-full group-hover:text-gray-400"
+      className="text-transparent w-full group-hover:text-gray"
     >
       <TrashIcon className="w-5 h-5" />
     </Button>

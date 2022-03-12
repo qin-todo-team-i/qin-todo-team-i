@@ -25,7 +25,7 @@ export const DuplicateTodaysToDo = ({ tasks, index, getTasks }) => {
     <Button
       type="button"
       onClick={() => handleDuplicateTask(index)}
-      className="text-transparent w-full group-hover:text-gray-400"
+      className="text-transparent w-full group-hover:text-gray"
     >
       <DuplicateIcon className="w-5 h-5" />
     </Button>

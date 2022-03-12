@@ -34,7 +34,7 @@ export const EditTodaysToDo = ({
       onSubmit={handleSubmit(handleEditTask)}
       className="flex items-center gap-x-2"
     >
-      <span className="text-2xl text-gray-400">○</span>
+      <span className="text-2xl text-gray">○</span>
       <Input
         name="editTask"
         register={register}

@@ -23,7 +23,7 @@ export const CompletedTodaysToDo = ({ task, tasks, index, getTasks }) => {
     <Button
       onClick={() => handleCompletedTask(index)}
       type="button"
-      className={`relative w-auto text-2xl text-gray-400 ${
+      className={`relative w-auto text-2xl text-gray ${
         task.completed
           ? "after:content-['●'] after:text-sm after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:text-primary"
           : ""

@@ -38,7 +38,7 @@ export const AddTodaysToDo = ({ tasks, getTasks }) => {
           onSubmit={handleSubmit(handleAddTask)}
           className="flex items-center"
         >
-          <p className="mr-2 text-2xl text-gray-400">○</p>
+          <p className="mr-2 text-2xl text-gray">○</p>
           <Input name="addTask" register={register} outOfFocus={outOfFocus} />
         </form>
       ) : (
@@ -46,7 +46,7 @@ export const AddTodaysToDo = ({ tasks, getTasks }) => {
         <Button
           type="button"
           onClick={() => setIsOpenAdd(true)}
-          className="text-gray-400 w-full gap-x-2 text-left flex items-center"
+          className="text-gray w-full gap-x-2 text-left flex items-center"
         >
           <PlusCircleIcon className="w-6 h-6" />
           <span>タスクを追加する</span>

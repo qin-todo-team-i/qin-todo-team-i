@@ -33,7 +33,7 @@ const AccountSettings = () => {
         <div className="hidden lg:block">
           <ul className="flex items-center gap-x-8 text-sm font-bold mb-4">
             <li>ホーム</li>
-            <ChevronRightIcon className="w-4 h-4 text-gray-400" />
+            <ChevronRightIcon className="w-4 h-4 text-gray" />
             <li>アカウントの連携</li>
           </ul>
           <h1 className="text-3xl font-bold mb-8">アカウントの連携</h1>
@@ -43,17 +43,31 @@ const AccountSettings = () => {
           <ul className="">
             <li className="flex justify-between items-center mb-3">
               <span className="inline-flex items-center gap-3">
-                <Image src="/icon_google.svg" alt="logo" width={24} height={24} />
+                <Image
+                  src="/icon_google.svg"
+                  alt="logo"
+                  width={24}
+                  height={24}
+                />
                 <span>Goole</span>
               </span>
-              <button className="block px-6 py-2 bg-slate-100 rounded-3xl text-black">解除する</button>
+              <button className="block px-6 py-2 bg-slate-100 rounded-3xl text-black">
+                解除する
+              </button>
             </li>
             <li className="flex justify-between items-center">
               <span className="inline-flex items-center gap-3">
-                <Image src="/icon_apple.svg" alt="logo" width={24} height={24} />
+                <Image
+                  src="/icon_apple.svg"
+                  alt="logo"
+                  width={24}
+                  height={24}
+                />
                 <span>Apple</span>
               </span>
-              <button className="block px-6 py-2 bg-blue-600 rounded-3xl text-white">連携する</button>
+              <button className="block px-6 py-2 bg-blue-600 rounded-3xl text-white">
+                連携する
+              </button>
             </li>
           </ul>
         </section>
@@ -61,12 +75,16 @@ const AccountSettings = () => {
           <h2 className="text-slate-200 font-bold mb-5">アカウントの操作</h2>
           <ul>
             <li className="mb-5">
+
               <span className="text-red-500 font-bold cursor-pointer" onClick={openConfirmLogoutDialog}>
+
                 ログアウト
               </span>
             </li>
             <li className="">
+
               <span className="text-red-500 font-bold cursor-pointer" onClick={openConfirmDeleteAccountDialog}>
+
                 アカウントの削除
               </span>
             </li>

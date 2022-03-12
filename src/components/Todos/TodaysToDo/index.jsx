@@ -38,7 +38,7 @@ export const today = format(new Date(), "yyyy-MM-dd");
 // task API のエンドポイント
 export const tasksEndpoint = "http://localhost:3001/tasks";
 
-export const TodaysToDo = () => {
+export const TodaysToDo = ({ data }) => {
   const [tasks, setTasks] = useState([]);
   const [isOpenEdit, setIsOpenEdit] = useState(undefined);
 
@@ -53,12 +53,12 @@ export const TodaysToDo = () => {
   }, [setTasks]);
 
   useEffect(() => {
-    getTasks();
+    setTasks(data);
   }, []);
 
   return (
-    <div className="max-w-md">
-      <h1 className="text-primary font-bold text-2xl">今日する</h1>
+    <div className="max-w-md p-5">
+      <h1 className="text-primary font-bold text-1.5xl">今日する</h1>
 
       <div className="mt-6 space-y-2">
         {tasks.map((task, index) =>
