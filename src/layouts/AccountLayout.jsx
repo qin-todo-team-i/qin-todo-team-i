@@ -7,7 +7,7 @@ export const AccountLayout = (page, title) => {
       <header>
         <AccountHeader title={title} />
       </header>
-      <main>{page}</main>
+      <main className="max-w-5xl mx-auto px-6 py-6 ">{page}</main>
     </div>
   );
 };
