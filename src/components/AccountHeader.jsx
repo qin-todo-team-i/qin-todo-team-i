@@ -8,13 +8,13 @@ export const AccountHeader = (props) => {
 
   return (
     <>
-      <div className="max-w-5xl mx-auto flex justify-between items-center h-14 relative gap-x-6 mb-8">
+      <div className="max-w-5xl mx-auto flex justify-between items-center h-14 relative gap-x-6 px-6 mb-8">
         <button onClick={router.back}>
           <ChevronLeftIcon className="w-6 h-6" />
         </button>
 
         <h1 className="text-lg font-bold">{title}</h1>
-        <span></span>
+        <span>&nbsp;</span>
       </div>
     </>
   );
