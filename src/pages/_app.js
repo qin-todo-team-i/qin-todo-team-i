@@ -18,11 +18,13 @@ const fetcher = async (url) => {
 };
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <SWRConfig value={{ fetcher }}>
-      <Component {...pageProps} />
-    </SWRConfig>
-  );
+  const getLayout =
+    Component.getLayout ||
+    ((page) => {
+      return page;
+    });
+
+  return <SWRConfig value={{ fetcher }}>{getLayout(<Component {...pageProps} />)}</SWRConfig>;
 }
 
 export default MyApp;
