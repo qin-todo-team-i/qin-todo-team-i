@@ -2,12 +2,23 @@ import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 const ConfirmDialog = (props) => {
-  const { title, message, isConfirmDialogOpen, onClickSubmit, onClickCancel, onClose } = props;
+  const {
+    title,
+    message,
+    isConfirmDialogOpen,
+    onClickSubmit,
+    onClickCancel,
+    onClose,
+  } = props;
 
   return (
     <>
       <Transition appear show={isConfirmDialogOpen} as={Fragment}>
-        <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto" onClose={onClickCancel}>
+        <Dialog
+          as="div"
+          className="fixed inset-0 z-10 overflow-y-auto"
+          onClose={onClickCancel}
+        >
           <div className="min-h-screen px-4 text-center">
             <Transition.Child
               as={Fragment}
@@ -18,10 +29,13 @@ const ConfirmDialog = (props) => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0" />
+              <Dialog.Overlay className="fixed inset-0 bg-black opacity-10" />
             </Transition.Child>
 
-            <span className="inline-block h-screen align-middle" aria-hidden="true">
+            <span
+              className="inline-block h-screen align-middle"
+              aria-hidden="true"
+            >
               &#8203;
             </span>
             <Transition.Child
@@ -33,8 +47,11 @@ const ConfirmDialog = (props) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-md rounded-2xl">
-                <Dialog.Title as="h3" className="text-lg text-center leading-6 text-black font-bold mb-2">
+              <div className="inline-block w-full max-w-md p-6 sm:mt-64 mb-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-md rounded-2xl">
+                <Dialog.Title
+                  as="h3"
+                  className="text-lg text-center leading-6 text-black font-bold mb-2"
+                >
                   {title}
                 </Dialog.Title>
                 <div className="mt-2 mb-8">
