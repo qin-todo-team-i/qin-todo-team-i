@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.check-button {
+  @apply relative w-auto text-2xl text-gray;
+}
+
+.check-button-is-done {
+  @apply after:content-['●'] after:text-sm after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2;
+}
+
+.check-button-is-done-today {
+  @apply after:text-primary;
+}
+
+.check-button-is-done-tomorrow {
+  @apply after:text-secondary;
+}
+
+.check-button-is-done-nextTime {
+  @apply after:text-tertiary;
+}

@@ -2,6 +2,7 @@ import "src/styles/globals.css";
 import React from "react";
 import { SWRConfig } from "swr";
 import axios from "axios";
+import { RecoilRoot } from "recoil";
 
 const fetcher = async (url) => {
   const response = await axios
@@ -24,7 +25,13 @@ function MyApp({ Component, pageProps }) {
       return page;
     });
 
-  return <SWRConfig value={{ fetcher }}>{getLayout(<Component {...pageProps} />)}</SWRConfig>;
+  return (
+    <RecoilRoot>
+      <SWRConfig value={{ fetcher }}>
+        {getLayout(<Component {...pageProps} />)}
+      </SWRConfig>
+    </RecoilRoot>
+  );
 }
 
 export default MyApp;
