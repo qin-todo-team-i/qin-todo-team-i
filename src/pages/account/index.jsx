@@ -30,14 +30,7 @@ const Account = () => {
 
   return (
     <div className="px-4 relative">
-      <div className="py-4 max-w-2xl mx-auto">
-        <div className="flex justify-between justify-items-center lg:hidden">
-          <span className="flex flex-col justify-center">
-            <XIcon className="w-5 h-5" />
-          </span>
-          <h1 className="text-lg">アカウント</h1>
-          <span></span>
-        </div>
+      <div className="py-4 max-w-2xl mx-auto flex flex-col gap-12">
         {drawerMenuContents.map((drawerMenuContent) => {
           return (
             <>
@@ -45,15 +38,6 @@ const Account = () => {
             </>
           );
         })}
-        <ul className="list-none font-bold relative">
-          <li className="mt-6">
-            <Link href="/">お問い合わせ</Link>
-          </li>
-          <li className="mt-6 flex justify-between">
-            <span>バージョン</span>
-            <span>1.0.0</span>
-          </li>
-        </ul>
       </div>
     </div>
   );

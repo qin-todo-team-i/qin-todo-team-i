@@ -5,7 +5,7 @@ const Drawer = ({ menuContent }) => {
   const menuItems = menuContent.menuItems;
 
   return (
-    <div className="mt-12">
+    <div className="">
       <h2 className="text-gray text-sm">{menuContent.headline}</h2>
       <ul className="list-none relative font-bold">
         {menuItems.map((menuItem) => {
@@ -14,9 +14,7 @@ const Drawer = ({ menuContent }) => {
               <DrawerItem
                 item={menuItem.item}
                 path={menuItem.path}
-                selectedItem={
-                  menuItem.selectedItem ? menuItem.selectedItem : null
-                }
+                selectedItem={menuItem.selectedItem ? menuItem.selectedItem : null}
               />
             </>
           );
