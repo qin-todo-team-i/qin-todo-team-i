@@ -10,13 +10,12 @@ const Drawer = ({ menuContent }) => {
       <ul className="list-none relative font-bold">
         {menuItems.map((menuItem) => {
           return (
-            <>
-              <DrawerItem
-                item={menuItem.item}
-                path={menuItem.path}
-                selectedItem={menuItem.selectedItem ? menuItem.selectedItem : null}
-              />
-            </>
+            <DrawerItem
+              key={menuItem.key}
+              item={menuItem.item}
+              path={menuItem.path}
+              selectedItem={menuItem.selectedItem ? menuItem.selectedItem : null}
+            />
           );
         })}
       </ul>

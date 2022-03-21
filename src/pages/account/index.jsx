@@ -5,11 +5,13 @@ import { AccountLayout } from "src/layouts/AccountLayout";
 const Account = () => {
   const drawerMenuContents = [
     {
+      key: "account",
       headline: "設定",
       menuItems: [
-        { item: "プロフィール設定", path: "/account/profilesettings" },
-        { item: "アカウント設定", path: "/account/accountsettings" },
+        { key: "profilesettings", item: "プロフィール設定", path: "/account/profilesettings" },
+        { key: "accountsettings", item: "アカウント設定", path: "/account/accountsettings" },
         {
+          key: "themesettings",
           item: "テーマ",
           path: "/account/themesettings",
           selectedItem: "OSの設定に合わせる",
@@ -17,11 +19,12 @@ const Account = () => {
       ],
     },
     {
+      key: "support",
       headline: "サポート",
       menuItems: [
-        { item: "プライバシーポリシー", path: "/support/privacy-policy" },
-        { item: "利用規約", path: "/support/terms" },
-        { item: "オープンソースライセンス", path: "" },
+        { key: "privacy-policy", item: "プライバシーポリシー", path: "/support/privacy-policy" },
+        { key: "terms", item: "利用規約", path: "/support/terms" },
+        { key: "license", item: "オープンソースライセンス", path: "/account" },
       ],
     },
   ];
@@ -30,11 +33,7 @@ const Account = () => {
     <div className="px-4 relative">
       <div className="py-4 max-w-2xl mx-auto flex flex-col gap-12">
         {drawerMenuContents.map((drawerMenuContent) => {
-          return (
-            <>
-              <Drawer menuContent={drawerMenuContent} />
-            </>
-          );
+          return <Drawer key={drawerMenuContent.key} menuContent={drawerMenuContent} />;
         })}
       </div>
     </div>
