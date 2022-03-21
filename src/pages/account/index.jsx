@@ -1,7 +1,5 @@
-import Link from "next/link";
 import React from "react";
 import Drawer from "src/components/Account/Drawer";
-import { XIcon, CogIcon, LogoutIcon } from "@heroicons/react/solid";
 import { AccountLayout } from "src/layouts/AccountLayout";
 
 const Account = () => {
@@ -44,6 +42,7 @@ const Account = () => {
 };
 
 const title = "設定";
-Account.getLayout = (page) => AccountLayout(page, title);
+const isTopLevel = true;
+Account.getLayout = (page) => AccountLayout(page, title, isTopLevel);
 
 export default Account;
