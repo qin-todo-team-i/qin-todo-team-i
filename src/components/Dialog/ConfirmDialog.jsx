@@ -50,7 +50,7 @@ const ConfirmDialog = (props) => {
               <div className="inline-block w-full max-w-md p-6 sm:mt-64 mb-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-md rounded-2xl">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg text-center leading-6 text-black font-bold mb-2"
+                  className="text-lg text-left leading-6 text-black font-bold mb-2"
                 >
                   {title}
                 </Dialog.Title>
@@ -58,7 +58,7 @@ const ConfirmDialog = (props) => {
                   <p className="text-sm text-black">{message}</p>
                 </div>
 
-                <div className="mt-4 flex justify-between">
+                <div className="mt-4 flex justify-end gap-4">
                   <button
                     type="button"
                     className="inline-flex justify-center w-32 px-2 py-3 text-sm font-bold text-black bg-slate-100 border border-transparent rounded-full hover:bg-blue-200 focus:outline-none focus-visible:none"
