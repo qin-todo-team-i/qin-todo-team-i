@@ -3,7 +3,7 @@ import { AccountLayout } from "src/layouts/AccountLayout";
 
 const PrivacyPolicy = () => {
   return (
-    <div className="prose">
+    <div className="prose mx-auto">
       <p>
         合同会社Qin（以下「弊社」とします）は、個人情報が人格尊重の理念の下に慎重に取扱われるべきものであることに鑑み、個人情報を保護することが弊社の事業活動の基本であり、社会的責務であると認識し、以下の方針に基づき個人情報の保護に努めます。
       </p>
