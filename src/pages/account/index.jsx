@@ -25,6 +25,7 @@ const Account = () => {
         { key: "privacy-policy", item: "プライバシーポリシー", path: "/support/privacy-policy" },
         { key: "terms", item: "利用規約", path: "/support/terms" },
         { key: "license", item: "オープンソースライセンス", path: "/account" },
+
       ],
     },
   ];
