@@ -3,6 +3,8 @@ import React from "react";
 import { SWRConfig } from "swr";
 import axios from "axios";
 import { RecoilRoot } from "recoil";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const fetcher = async (url) => {
   const response = await axios
@@ -28,7 +30,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <RecoilRoot>
       <SWRConfig value={{ fetcher }}>
-        {getLayout(<Component {...pageProps} />)}
+        <DndProvider backend={HTML5Backend}>
+          {getLayout(<Component {...pageProps} />)}
+        </DndProvider>
       </SWRConfig>
     </RecoilRoot>
   );
