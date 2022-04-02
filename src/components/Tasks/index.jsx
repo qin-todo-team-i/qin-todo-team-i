@@ -15,7 +15,9 @@ import { DuplicateTask } from "./DuplicateTask";
 import { EditTask } from "./EditTask";
 import { TaskList } from "./TaskList";
 
-export const Tasks = ({ limit, items, onMove }) => {
+export const Tasks = ({ limit, items, firstIndex, onMove }) => {
+  // console.log("Tasks", { limit, items, firstIndex });
+
   // const tasks = useRecoilValue(tasksState);
   // const [tasks, setTasks] = useRecoilState(tasksState);
   const [targetId, setTargetId] = useState(undefined);
@@ -75,7 +77,6 @@ export const Tasks = ({ limit, items, onMove }) => {
   //   [filterdTaskAddGroup, setFilterdTaskAddGroup]
   // );
 
-  const firstIndex = 0;
   const [, ref] = useDrop({
     accept: ["today", "tomorrow", "nextTime"],
     hover(dragItem) {
@@ -87,7 +88,7 @@ export const Tasks = ({ limit, items, onMove }) => {
             firstIndex + items.length - 1
           : // backward
             firstIndex + items.length;
-      moveItem(dragIndex, targetIndex, limit);
+      onMove(dragIndex, targetIndex, limit);
       dragItem.index = targetIndex;
       dragItem.group = limit;
     },
@@ -103,8 +104,8 @@ export const Tasks = ({ limit, items, onMove }) => {
         <h1 className="text-tertiary font-bold text-1.5xl">今度する</h1>
       ) : null}
 
-      {/* <div className="mt-6 space-y-2" ref={ref}> */}
-      <div className="mt-6 space-y-2">
+      <div className="mt-6 space-y-2" ref={ref}>
+        {/* <div className="mt-6 space-y-2"> */}
         {items
           ? items.map((task, index) =>
               targetId === task.id ? ( // タスク編集状態
@@ -115,7 +116,7 @@ export const Tasks = ({ limit, items, onMove }) => {
               ) : (
                 // </Draggable>
                 // 非タスク編集状態
-                <Draggable key={task.id} item={{ ...task, index }} index={index} onMove={onMove}>
+                <Draggable key={task.id} item={{ ...task, index }} index={firstIndex + index} onMove={onMove}>
                   <div key={task.id} className="flex items-start gap-x-2 group justify-between">
                     <div className="flex items-start text-left flex-1 gap-x-2">
                       {/* 完了・非完了のチェックボックス */}

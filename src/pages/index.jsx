@@ -13,13 +13,15 @@ const Home = () => {
 
   const { getTasks } = useTaskApi();
   useEffect(() => {
+    console.log("useEffect");
     getTasks(setTasks);
-  }, [getTasks, setTasks]);
+  }, []);
 
   const [groupedItems, items, setItems] = useGroupedItems(tasks);
 
   const moveItem = useCallback(
     (dragIndex, targetIndex, group) => {
+      console.log("moveItem", dragIndex, targetIndex, group); //TODO:
       const item = items[dragIndex];
       if (!item) return;
       setItems((prevState) => {
@@ -44,12 +46,16 @@ const Home = () => {
   const tomorrowItems = groupedItems["tomorrow"];
   const nextTimeItems = groupedItems["nextTime"];
 
+  const firstIndexToday = 0;
+  const firstIndexTomorrow = todayItems.length;
+  const firstIndexNextTime = firstIndexTomorrow + tomorrowItems.length;
+
   return (
     <Layout>
       <div className="flex justify-between max-w-7xl mt-10 mx-auto">
-        <Tasks limit="today" items={todayItems} onMove={moveItem} />
-        <Tasks limit="tomorrow" items={tomorrowItems} onMove={moveItem} />
-        <Tasks limit="nextTime" items={nextTimeItems} onMove={moveItem} />
+        <Tasks limit="today" items={todayItems} firstIndex={firstIndexToday} onMove={moveItem} />
+        <Tasks limit="tomorrow" items={tomorrowItems} firstIndex={firstIndexTomorrow} onMove={moveItem} />
+        <Tasks limit="nextTime" items={nextTimeItems} firstIndex={firstIndexNextTime} onMove={moveItem} />
       </div>
     </Layout>
   );
