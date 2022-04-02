@@ -25,28 +25,15 @@ export const useTaskApi = () => {
   };
 
   const getGroupLabel = (limit, doneAt) => {
-    // if (limit === "today") {
-    //   return format(new Date(task.limit), "yyyy-MM-dd") <= today && task.doneAt >= today;
-    // }
-    // if (limit === "tomorrow") {
-    //   return format(new Date(task.limit), "yyyy-MM-dd") === tomorrow && task.doneAt >= today;
-    // }
-    // if (limit === "nextTime") {
-    //   return format(new Date(task.limit), "yyyy-MM-dd") >= nextTime && task.doneAt >= today;
-    // }
     if (format(new Date(limit), "yyyy-MM-dd") <= today && doneAt >= today) {
-      console.log("return today");
       return "today";
     }
     if (format(new Date(limit), "yyyy-MM-dd") === tomorrow && doneAt >= today) {
-      console.log("return tomorrow");
       return "tomorrow";
     }
     if (format(new Date(limit), "yyyy-MM-dd") >= nextTime && doneAt >= today) {
-      console.log("return nextTime");
       return "nextTime";
     }
-    console.log("return null");
     return "";
   };
 
