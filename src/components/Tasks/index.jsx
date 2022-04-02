@@ -48,7 +48,7 @@ export const Tasks = ({ limit, items, firstIndex, onMove }) => {
               ) : (
                 // 非タスク編集状態
                 <Draggable key={task.id} item={{ ...task, index }} index={firstIndex + index} onMove={onMove}>
-                  <div key={task.id} className="flex items-start gap-x-2 group justify-between border border-gray">
+                  <div key={task.id} className="flex items-start gap-x-2 group justify-between">
                     <div className="flex items-start text-left flex-1 gap-x-2">
                       {/* 完了・非完了のチェックボックス */}
                       <DoneTask targetId={task.id} limit={limit} />
