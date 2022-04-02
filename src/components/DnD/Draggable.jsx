@@ -2,11 +2,10 @@ import React, { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 
 const Draggable = ({ item, index, onMove, children }) => {
-  // console.log({ item }); //TODO:
   const ref = useRef(null);
 
   const [, drop] = useDrop({
-    // acceptに指定したtypeだけがコールバックへの対象となる (本サンプルでは ['todo', 'doing', 'done'])
+    // acceptに指定したtypeだけがコールバックへの対象となる
     accept: ["today", "tomorrow", "nextTime"],
     // マウスドラッグをしたときにhoverした部分でのコールバックを定義
     hover(dragItem, monitor) {
@@ -16,7 +15,6 @@ const Draggable = ({ item, index, onMove, children }) => {
       if (dragIndex === hoverIndex) return;
 
       if (item.group === dragItem.group) {
-        console.log({ dragIndex, hoverIndex }); //TODO:
         // グループ内での並び替えの場合は入れ替え方向とhover位置に応じて入れ替えるかを確定
         const hoverRect = ref.current.getBoundingClientRect();
         const hoverMiddleY = (hoverRect.bottom - hoverRect.top) / 2;
@@ -28,7 +26,6 @@ const Draggable = ({ item, index, onMove, children }) => {
       }
 
       // 内部のデータも変更しつつ、onMoveでstate変更を依頼する
-      console.log("onMove");
       onMove(dragIndex, hoverIndex, item.group);
       dragItem.index = hoverIndex;
       dragItem.group = item.group;

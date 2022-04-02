@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { Tasks } from "src/components/Tasks";
 import { useFetch } from "src/hooks/useFetch";
 import useGroupedItems from "src/hooks/useGroupedItems";
@@ -13,7 +13,6 @@ const Home = () => {
 
   const { getTasks } = useTaskApi();
   useEffect(() => {
-    console.log("useEffect");
     getTasks(setTasks);
   }, []);
 
@@ -21,7 +20,6 @@ const Home = () => {
 
   const moveItem = useCallback(
     (dragIndex, targetIndex, group) => {
-      console.log("moveItem", dragIndex, targetIndex, group); //TODO:
       const item = items[dragIndex];
       if (!item) return;
       setItems((prevState) => {
@@ -32,7 +30,6 @@ const Home = () => {
     },
     [items, setItems]
   );
-  // console.log({ groupedItems });
 
   const { error, isLoading } = useFetch(tasksUrl);
   if (isLoading) {
