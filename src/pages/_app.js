@@ -10,13 +10,13 @@ const fetcher = async (url) => {
   const response = await axios
     .get(url)
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       return res.data;
     })
     .catch((e) => {
       return e;
     });
-  console.log("response", response);
+  // console.log("response", response);
   return response;
 };
 
@@ -30,9 +30,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <RecoilRoot>
       <SWRConfig value={{ fetcher }}>
-        <DndProvider backend={HTML5Backend}>
-          {getLayout(<Component {...pageProps} />)}
-        </DndProvider>
+        <DndProvider backend={HTML5Backend}>{getLayout(<Component {...pageProps} />)}</DndProvider>
       </SWRConfig>
     </RecoilRoot>
   );
