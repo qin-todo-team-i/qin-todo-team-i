@@ -8,6 +8,8 @@
 - ESLint
 - Prettier
 
+- firebase
+
 ## 環境構築手順
 
 ### 1. リポジトリのクローンを作成
