@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import Home from "src/components/Home";
-import Login from "src/components/login";
 
 const page = () => {
   const [userLogin, setUserLogin] = useState(false);
