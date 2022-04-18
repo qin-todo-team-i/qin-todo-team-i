@@ -1,5 +1,7 @@
 # Qin-Todo チーム I
 
+開発終了
+
 ## 技術選定
 
 - React(Next.js)
